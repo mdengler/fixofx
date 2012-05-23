@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 
-DISTNAME = ''
+DISTNAME = 'fixofx'
 DESCRIPTION = ''
 LONG_DESCRIPTION = ''
 MAINTAINER = ''
