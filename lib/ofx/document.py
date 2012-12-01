@@ -63,7 +63,11 @@ class Document:
             xml += """<!-- Date format was: %s -->\n""" % date_format
 
         taglist = self.parse_dict["body"]["OFX"].asList()
-        xml += self._format_xml(taglist)
+
+        if len(taglist) == 1 and isinstance(taglist[0], list):
+            xml += self._format_xml(taglist[0])
+        else:
+            xml += self._format_xml(taglist)
 
         return xml
 
