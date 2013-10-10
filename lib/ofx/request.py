@@ -22,7 +22,7 @@ import datetime
 import uuid
 
 class Request:
-    def __init__(self, cookie=4, app_name="Money", app_version="1400"):
+    def __init__(self, cookie=4, app_name="QWIN", app_version="1900"):
         # Note that American Express, at least, requires the app name
         # to be titlecase, and not all uppercase, for the request to
         # succeed.  Memories of Mozilla....
