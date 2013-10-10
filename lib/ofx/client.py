@@ -18,6 +18,7 @@
 #
 
 import ofx
+import sys
 import urllib2
 
 class Client:
@@ -147,7 +148,7 @@ class Client:
         stream.close()
 
         if self.debug:
-            print response
+            sys.stderr.write(response + "\n")
 
         response = ofx.Response(response)
         response.check_signon_status()
