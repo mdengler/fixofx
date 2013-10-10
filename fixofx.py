@@ -162,7 +162,7 @@ if options.verbose and not hasattr(open, 'newlines'):
     # Universal newlines are generally needed to deal with various QIF downloads.
     sys.stderr.write('Warning: universal newline support NOT available.\n')
 
-if options.verbose: print "Options: %s" % options
+if options.verbose: sys.stderr.write("Options: %s\n" % options)
 
 #
 # Load up the raw text to be converted.
@@ -180,13 +180,13 @@ if options.filename:
             rawtext = srcfile.read()
             srcfile.close()
         except StandardError, detail:
-            print "Exception during file read:\n%s" % detail
-            print "Exiting."
+            sys.stderr.write("Exception during file read:\n%s\n" % detail)
+            sys.stderr.write("Exiting.\n")
             sys.stderr.write("fixofx failed with error code 1\n")
             sys.exit(1)
 
     else:
-        print "'%s' does not appear to be a file.  Try --help." % options.filename
+        sys.stderr.write("'%s' does not appear to be a file.  Try --help." % options.filename)
         sys.stderr.write("fixofx failed with error code 2\n")
         sys.exit(2)
 
@@ -203,8 +203,8 @@ else:
     rawtext = stdin_universal.read()
 
     if rawtext == "" or rawtext is None:
-        print "No input.  Pipe a file to convert to the script,\n" + \
-              "or call with -f.  Call with --help for more info."
+        sys.stderr.write("No input.  Pipe a file to convert to the script,\n" + \
+                         "or call with -f.  Call with --help for more info.\n")
         sys.stderr.write("fixofx failed with error code 3\n")
         sys.exit(3)
 
@@ -234,13 +234,13 @@ try:
     sys.exit(0)
 
 except ParseException, detail:
-    print "Parse exception during '%s' conversion:\n%s" % (filetype, detail)
-    print "Exiting."
+    sys.stderr.write("Parse exception during '%s' conversion:\n%s\n" % (filetype, detail))
+    sys.stderr.write("Exiting.\n")
     sys.stderr.write("fixofx failed with error code 4\n")
     sys.exit(4)
 
 except TypeError, detail:
-    print detail
-    print "Exiting."
+    sys.stderr.write(detail + "\n")
+    sys.stderr.write("Exiting.\n")
     sys.stderr.write("fixofx failed with error code 5\n")
     sys.exit(5)
