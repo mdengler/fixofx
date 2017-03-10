@@ -44,12 +44,24 @@ class Document:
         #forcing encoding to utf-8
         encoding = "UTF-8"
 
+        header_dict = self.parse_dict["header"]
+
+        if 'OLDFILEUID' not in header_dict:
+            OLDFILEUID = 'NONE'
+        else:
+            OLDFILEUID = header_dict['OLDFILEUID']
+
+        if 'NEWFILEUID' not in header_dict:
+            NEWFILEUID = 'NONE'
+        else:
+            NEWFILEUID = header_dict['NEWFILEUID']
+
         xml += """<?xml version="1.0" encoding="%s"?>\n""" % encoding
         xml += """<?OFX OFXHEADER="200" VERSION="200" """ + \
                """SECURITY="%s" OLDFILEUID="%s" NEWFILEUID="%s"?>\n""" % \
                (self.parse_dict["header"]["SECURITY"],
-                self.parse_dict["header"]["OLDFILEUID"],
-                self.parse_dict["header"]["NEWFILEUID"])
+                OLDFILEUID,
+                NEWFILEUID)
 
         if original_format is not None:
             xml += """<!-- Converted from: %s -->\n""" % original_format
